@@ -2,6 +2,7 @@ import stagger
 import os
 from os.path import join
 import shutil
+import argparse
 
 def title_to_title_and_artist(file):
     split_title = [x.strip() for x in file['title'].split('-')]
@@ -30,35 +31,59 @@ def format_text(text):
         mid = mid[3:]
     return mid
 
-filelist = []
-for path, subdirs, files in os.walk('ipod'):
-    for file in files:
-        cpath = os.path.join(path,file)
-        cfile = {'origin': cpath}
+def analyze_and_move(inputdir, outputdir, delete):
+    filelist = []
+    for path, subdirs, files in os.walk(inputdir):
+        for file in files:
+            cpath = os.path.join(path,file)
+            cfile = {'origin': cpath}
+            try:
+                tag = stagger.read_tag(cpath)
+                if tag.album:
+                    cfile['album'] = format_text(tag.album)
+                if tag.artist:
+                    cfile['artist'] = format_text(tag.artist)
+                if tag.title:
+                    cfile['title'] = format_text(tag.title)
+            except stagger.errors.NoTagError:
+                pass
+            
+            if len(cfile.keys()) == 2:
+                if 'title' in cfile.keys():
+                    cfile = title_to_title_and_artist(cfile)
+                else:
+                    print('Unhandled file meta data format:', cfile['origin'])
+            filelist.append(cfile)
+            
+    for file in filelist:
+        export = construct_export_string(outputdir, file)
         try:
-            tag = stagger.read_tag(cpath)
-            if tag.album:
-                cfile['album'] = format_text(tag.album)
-            if tag.artist:
-                cfile['artist'] = format_text(tag.artist)
-            if tag.title:
-                cfile['title'] = format_text(tag.title)
-        except stagger.errors.NoTagError:
+            os.makedirs(os.path.split(export)[0])
+        except FileExistsError:
             pass
-        
-        if len(cfile.keys()) == 2:
-            if 'title' in cfile.keys():
-                cfile = title_to_title_and_artist(cfile)
-            else:
-                print('Unhandled file meta data format:', cfile['origin'])
+        if not delete:
+            try:
+                shutil.copy2(file['origin'], export)
+            except FileNotFoundError:
+                shutil.copy2(file['origin'], join(os.path.split(export)[0], file['title'].split('.')[0] + os.path.splitext(file['origin'])[1]))
+        else:
+            try:
+                shutil.move(file['origin'], export)
+            except FileNotFoundError:
+                shutil.move(file['origin'], join(os.path.split(export)[0], file['title'].split('.')[0] + os.path.splitext(file['origin'])[1]))
+    if delete:
+        shutil.rmtree(inputdir)
 
-        filelist.append(cfile)
-        
-for file in filelist:
-    export = construct_export_string('Music', file)
-    try:
-        os.makedirs(os.path.split(export)[0])
-    except FileExistsError:
-        pass
-    shutil.copy2(file['origin'], export)
+def main():
+    pars = argparse.ArgumentParser(description='ID3 File Parser and organizer for music files')
+    pars.add_argument('--input', '-i', nargs=1, help='Input directory to search')
+    pars.add_argument('--output', '-o', nargs=1, help='Output directory to move the files to')
+    pars.add_argument('--delete', '-d', default=False, help='Whether to delete the original file') 
+    args = pars.parse_args()
+
+    if args.input and args.output:
+        analyze_and_move(args.input[0], args.output[0], args.delete)
+
+if __name__ == '__main__':
+  main()
 
