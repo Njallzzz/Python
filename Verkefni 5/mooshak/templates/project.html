@@ -1,0 +1,37 @@
+<!doctype html> 
+
+<html>
+	<head>
+		<title>Project: {{ project['name'] }}</title>
+	</head>
+	<body>
+		<table border=1 style='width:100%'>
+		<tr><td><center><h1>Mini Mooshak</h1></center>
+		<div align=right>Logged in as: {{ name }}<br><a href='/'>Back</a> - <a href='logout'>Logout</a></div></td></tr>
+		<tr><td>
+		<h2>{{ project['name'] }}</h2>
+		<p>{{ project['desc'] }}</p>
+		</td></tr>
+		
+		<tr><td>
+			<form action="upload" method="post" enctype="multipart/form-data">
+				<h2>Upload the solution:</h2>
+				<p> 
+				<input type="file" name="file"><br>
+				<input type="hidden" name="project" value="{{ project['id'] }}">
+				<input type="submit" value="Upload"> 
+				</p>
+			</form>
+		</td></tr>
+		</table>
+		
+		{% if results %}
+		<br><h2>Results</h2>
+		<table border=1 style='width:60%'>
+		{% for entry in results %}
+		<tr><td>{{ entry[0] }}</td><td><a href="{{  project['id']  }}/{{  entry[0]  }}">{{ entry[1] }}</a></td></tr>
+		{% endfor %}
+		</table>
+		{% endif %}
+	</body>
+</html>

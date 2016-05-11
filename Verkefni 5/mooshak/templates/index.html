@@ -2,20 +2,18 @@
 
 <html>
 	<head>
-		<title>Upload a C++ file</title>
+		<title>Mini Mooshak</title>
 	</head>
 	<body>
-
-		<h1>Upload a file to compile and run</h1>
-
-		<form action="upload" method="post" enctype="multipart/form-data">
-
-			<p> 
-			<input type="file" name="file"><br>     
-			<input type="hidden" name="project" value="1">
-			<input type="submit" value="Upload"> 
-			</p>
-
-		</form>
+		<table border=1 style='width:100%'>
+		<tr><td><center><h1>Mini Mooshak</h1></center><div align="right">Logged in as: {{ name }}<br><a href='logout'>Logout</a></div></td></tr>
+		
+		<tr><td>
+		<h2>Projects</h2>
+		{% for entry in projects %}
+		<p><a href="{{ entry['id'] }}">{{ entry['name'] }}</a></p>
+		{% endfor %}
+		</td></tr>
+		</table>
 	</body>
 </html>

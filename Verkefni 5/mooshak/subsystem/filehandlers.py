@@ -5,7 +5,7 @@ import os
 from os.path import join
 
 def file_pages(app):
-    app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+    app.config['MAX_CONTENT_LENGTH'] = 256 * 1024 * 1024
     app.config['UPLOAD_FOLDER'] = 'user_files'
 
     @app.route('/upload', methods=['GET', 'POST'])
@@ -14,8 +14,7 @@ def file_pages(app):
         if check_logged(session):
             return check_logged(session)
         if request.method != 'POST':
-            return 'test'
-            #(405)
+            abort(405)
 
 
         file = request.files['file']
@@ -30,8 +29,7 @@ def file_pages(app):
             file.save(join(path, filename))
             return redirect(url_for('uploaded_file', filename=filename))
         else:
-            return 'kappa'
-            #abort(411)
+            abort(411)
     
     @app.route('/uploads/<filename>')
     def uploaded_file(filename):

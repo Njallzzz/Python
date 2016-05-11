@@ -1,0 +1,17 @@
+Hello World
+--
+The goal of this project is to make a class with a hello function that will return a std::string that says hello world
+Retrieve the base project here: {URL}
+example:
+
+myClass instance;
+std::cout << myClass.hello() << std::endl
+--
+/static/helloworld.zip
+--
+admin kappa123 dansar14
+--
+test1, outputtest1
+test2, outputtest2
+test3, outputtest3
+test4, outputtest4

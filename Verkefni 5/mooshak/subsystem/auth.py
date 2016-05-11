@@ -9,7 +9,9 @@ def check_logged(session):
 
 class Auth_Master():
     def __init__(self):        
-        self.users = {'admin': pwd_context.encrypt('penguin') }
+        self.users = {'admin': pwd_context.encrypt(''),
+                      'kappa123': pwd_context.encrypt('123'),
+                      'nokappa': pwd_context.encrypt('123') }
 
     def valid_login(self, username, password):
         if username in self.users.keys():
