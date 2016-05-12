@@ -11,7 +11,7 @@ std::cout << myClass.hello() << std::endl
 --
 admin kappa123 dansar14
 --
-test1, outputtest1
-test2, outputtest2
-test3, outputtest3
-test4, outputtest4
+test1.cpp outputtest1
+test2.cpp outputtest2
+test3.cpp outputtest3
+test4.cpp outputtest4

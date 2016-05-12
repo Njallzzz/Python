@@ -1,0 +1,1 @@
+smoke weed on the third day

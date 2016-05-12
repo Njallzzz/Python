@@ -10,13 +10,12 @@
 		<div align=right>Logged in as: {{ name }}<br><a href='/{{ project['id'] }}'>Back</a> - <a href='logout'>Logout</a></div></td></tr>
 		<tr><td>
 		<h2>{{ project['name'] }}</h2>
-		<p>{{ project['desc'] }}</p>
+		<p>{{  results[0]  }}</p>
 		</td></tr>
-		
 		<br><h2>Results</h2>
-		<table border=1 style='width:60%'>
-		{% for entry in results %}
-		<tr><td>{{ entry[0] }}</td><td><a href="{{  project['id']  }}/{{  entry[0]  }}">{{ entry[1] }}</a></td></tr>
+		<table border=1 style='width:100%'>
+		{% for entry in results[1:] %}
+		<tr><td><h2>Received output:</h2><p>{{ entry[0][0] }}</p></td><td><h2>Expected output:</h2><p>{{ entry[1][0] }}</p></td></tr>
 		{% endfor %}
 		</table>
 	</body>

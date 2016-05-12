@@ -1,5 +1,5 @@
 from models import Project
-from flask import escape, session
+from flask import escape, session, Markup
 
 import os
 from os.path import join
@@ -44,14 +44,21 @@ def get_results(app, session, project):
             if '__results__' == file:
                 with open(join(path, file)) as cf:
                     results.append([ os.path.split(path)[-1], cf.read().splitlines()[0]])
+                break
     return sorted(results, key=lambda x: x[0], reverse=True)
 
 def get_result(app, session, project, entry):
     results = []
-    d = join(join(app.config['UPLOAD_FOLDER'], escape(session['username'])), str(project))
+    d = join(join(join(app.config['UPLOAD_FOLDER'], escape(session['username'])), str(project)), str(entry))
     for path, subdirs, files in os.walk(d):
         for file in files:
             if '__results__' == file:
                 with open(join(path, file)) as cf:
-                    results.append([ os.path.split(path)[-1], cf.read().splitlines()[0]])
-    return sorted(results, key=lambda x: x[0], reverse=True)
+                    data = cf.read().split('--')
+                    results.append(data[0].replace('\n', ''))
+                    data = list(map(lambda x: x.replace('\n', '<br>'), data[1:]))
+                    data = list(map(lambda x: [Markup(x[4:])] if x.startswith('<br>') else [Markup(x)], data))
+                    data = zip(data[::2], data[1::2])
+                    results.extend(data)
+                break
+    return results
