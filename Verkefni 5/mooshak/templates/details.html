@@ -15,7 +15,7 @@
 		<br><h2>Results</h2>
 		<table border=1 style='width:100%'>
 		{% for entry in results[1:] %}
-		<tr><td><h2>Received output:</h2><p>{{ entry[0][0] }}</p></td><td><h2>Expected output:</h2><p>{{ entry[1][0] }}</p></td></tr>
+		<tr  style="vertical-align:top;"><td><h2>Received output:</h2><p>{{ entry[0][0] }}</p></td><td><h2>Expected output:</h2><p>{{ entry[1][0] }}</p></td></tr>
 		{% endfor %}
 		</table>
 	</body>

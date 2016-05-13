@@ -1,9 +1,10 @@
-Incorrect output
+Accepted
 --
 Hello
 
 --
 Hello
+
 --
 Hello there
 Hello there
@@ -11,11 +12,13 @@ Hello there
 --
 Hello there
 Hello there
+
 --
 there
 
 --
 there
+
 --
 Hello Hrafn
 

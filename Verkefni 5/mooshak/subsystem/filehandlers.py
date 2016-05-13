@@ -29,9 +29,10 @@ def file_pages(app):
             except FileExistsError:
                 pass
             _, subdirs, _ = next(os.walk(path))
+
             lastEntry = 0
             for subdir in subdirs:
-                if subdir.isdigit() and int(subdir) > 0:
+                if subdir.isdigit() and int(subdir) > lastEntry:
                     lastEntry = int(subdir)
             lastEntry = lastEntry + 1
             path = join(path, str(lastEntry))
@@ -47,10 +48,3 @@ def file_pages(app):
             return redirect(url_for('project', id=request.form['project']))
         else:
             abort(411)
-    
-    @app.route('/uploads/<filename>')
-    def uploaded_file(filename):
-        if check_logged(session):
-            return check_logged(session)
-        
-        return send_from_directory(app.config['UPLOAD_FOLDER'], filename)

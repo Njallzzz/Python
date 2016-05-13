@@ -45,7 +45,7 @@ def get_results(app, session, project):
                 with open(join(path, file)) as cf:
                     results.append([ os.path.split(path)[-1], cf.read().splitlines()[0]])
                 break
-    return sorted(results, key=lambda x: x[0], reverse=True)
+    return sorted(results, key=lambda x: int(x[0]), reverse=True)
 
 def get_result(app, session, project, entry):
     results = []
