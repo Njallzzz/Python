@@ -17,9 +17,13 @@
 			<form action="upload" method="post" enctype="multipart/form-data">
 				<h2>Upload the solution:</h2>
 				<p> 
-				<input type="file" name="file"><br>
+				<input type="file" name="file">
 				<input type="hidden" name="project" value="{{ project['id'] }}">
-				<input type="submit" value="Upload"> 
+				<input type="submit" value="Upload">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+				Max filesize: {{ maxfilesize }}MB
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				Allowed extensions: {{ ', '.join(allowed_extensions) }}
 				</p>
 			</form>
 		</td></tr>

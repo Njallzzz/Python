@@ -1,0 +1,39 @@
+<!doctype html> 
+
+<html>
+	<head>
+		<title>Mini Mooshak</title>
+	</head>
+	<body>
+		<table border=1 style='width:100%'>
+		<tr><td colspan=2><center><h1>Mini Mooshak</h1></center><div align="right">Logged in as: {{ name }}<br><a href="/">Back</a> - <a href='logout'>Logout</a></div></td></tr>
+		
+		<tr><td style="width:50%;">
+		<h2>Create User</h2>
+		<form action="" method=POST>
+			<p>Username: <input type="text" name="username"></p>
+			<p>Password: <input type="password" name="password"></p>
+			<input type="submit" value="Create">
+		</form>
+		</td><td style="width:50%;vertical-align:top;">
+		
+		<form action="" method=POST>
+			<p>Parses the 'projects' directory for new projects</p>
+			<input type="hidden" name="button" value="projects">
+			<input type="submit" value="Retrieve project list">
+		</form>
+		
+		<form action="" method=POST>
+			<p>Retrieves all users from the SQLite3 database</p>
+			<input type="hidden" name="button" value="users">
+			<input type="submit" value="Retrieve users from database">
+		</form>
+		
+		</td></tr>
+		<tr><td colspan=2>
+		<h2>User List</h2>
+		<p>{{ ', '.join(users) }}</p>
+		</td></tr>
+		</table>
+	</body>
+</html>

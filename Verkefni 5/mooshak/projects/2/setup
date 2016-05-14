@@ -5,9 +5,6 @@ URL: {URL}
 --
 /static/queue.zip
 --
-admin kappa123 nokappa
+admin testuser2 hjalti
 --
 test1.cpp outputtest1
-test2.cpp outputtest2
-test3.cpp outputtest3
-test4.cpp outputtest4

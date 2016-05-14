@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<table border=1 style='width:100%'>
-		<tr><td><center><h1>Mini Mooshak</h1></center><div align="right">Logged in as: {{ name }}<br><a href='logout'>Logout</a></div></td></tr>
+		<tr><td><center><h1>Mini Mooshak</h1></center><div align="right">Logged in as: {{ name }}<br>{% if mod %}<a href="/admin">Administration</a> - {% endif %}<a href='logout'>Logout</a></div></td></tr>
 		
 		<tr><td>
 		<h2>Projects</h2>

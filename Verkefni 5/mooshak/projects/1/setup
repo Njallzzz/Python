@@ -9,7 +9,7 @@ std::cout << myClass.hello() << std::endl
 --
 /static/helloworld.zip
 --
-admin kappa123 dansar14
+admin testuser1 testuser3
 --
 test1.cpp outputtest1
 test2.cpp outputtest2

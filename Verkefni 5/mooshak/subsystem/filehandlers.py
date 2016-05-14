@@ -5,9 +5,13 @@ from werkzeug import secure_filename
 import os
 from os.path import join
 
+def allowed_file(app, filename):
+    return '.' in filename and filename.rsplit('.', 1)[1] in app.allowed_extensions
+
 def file_pages(app):
     app.config['MAX_CONTENT_LENGTH'] = 256 * 1024 * 1024
     app.config['UPLOAD_FOLDER'] = 'user_files'
+    app.allowed_extensions = set( ['zip'] )
 
     @app.route('/upload', methods=['GET', 'POST'])
     def upload():
@@ -17,8 +21,10 @@ def file_pages(app):
         if request.method != 'POST':
             abort(405)
 
-
         file = request.files['file']
+        if file and (not allowed_file(app, file.filename)):
+            return '<b>Not a valid file type</b><br>Valid filetypes: {}'.format(', '.join(app.allowed_extensions))
+        
         if file and 'username' in session and request.form['project']:
             if (not request.form['project'].isdigit()) or (not int(request.form['project']) in app.projects.keys()):
                 abort(411)

@@ -1,13 +1,13 @@
 #include "myclass.h"
 
 std::string myClass::hello() {
-	return std::string("Hello");
+	return std::string("Hello")
 }
 
 std::string myClass::hello(std::string who) {
-	return std::string("Hello ") + who;
+	return std::string("Hello ") + who
 }
 
 std::string myClass::there() {
-	return std::string("there");
+	return std::string("there")
 }

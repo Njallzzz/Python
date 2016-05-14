@@ -11,7 +11,8 @@ from os.path import join
 def extract_zipfile(source, dest):
     try:
         with zipfile.ZipFile(source, 'r') as zipf:
-                zipf.extractall(dest)
+            filelist = zipf.namelist()
+            zipf.extractall(dest)
     except FileNotFoundError:
         with open(join(path, '__results__'), 'w') as cf:
             cf.write('Unable to extract zip file')
@@ -20,14 +21,17 @@ def extract_zipfile(source, dest):
         with open(join(path, '__results__'), 'w') as cf:
             cf.write('Unable to extract zip file')
         return False
-    return True
+    return filelist
 
-def compile_program(path, file):
+def compile_program(path, file, zipfilelist):
     source = join(path, file)
     dest = join(path, os.path.splitext(file)[0])
-    # Fix sometime
-    others = [ join(path, 'myclass.cpp') ]
-    #
+
+    others = []
+    for entry in zipfilelist:
+         if os.path.splitext(entry)[1] == '.cpp':
+             others.append(join(path, entry))
+
     compiler_params = ['g++', '-o', dest, source]
     compiler_params.extend(others)
     try:
@@ -46,7 +50,8 @@ def run_test(program):
     return response.stdout.decode('UTF-8')
 
 def worker(path, project):
-    if not extract_zipfile(join(path, str(project.id) + '.zip'), path):
+    zipfilelist = extract_zipfile(join(path, str(project.id) + '.zip'), path)
+    if not zipfilelist:
         return
     listResults = []
     testresults = None
@@ -57,7 +62,7 @@ def worker(path, project):
         with open(case[1],'r') as expected:
             results = expected.read()
 
-        compileoutput = compile_program(path, os.path.split(case[0])[1])
+        compileoutput = compile_program(path, os.path.split(case[0])[1], zipfilelist)
         if compileoutput:
             if not testresults:
                 testresults = re.search(r'(Compiler [^:]*)', compileoutput).group(1)
@@ -72,6 +77,7 @@ def worker(path, project):
                 listResults.append([runoutput, results])
 
     if not testresults:
+        print(listResults)
         if any(list(map(lambda x: x[0] != x[1], listResults))):
             testresults = 'Incorrect output'
         else:

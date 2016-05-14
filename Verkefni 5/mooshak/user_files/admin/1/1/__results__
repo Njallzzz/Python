@@ -1,23 +1,69 @@
-Incorrect output
+Compiler error
+--
+Compiler error: user_files\admin\1\1\myclass.cpp: In member function 'std::__cxx11::string myClass::hello()':
+user_files\admin\1\1\myclass.cpp:5:1: error: expected ';' before '}' token
+ }
+ ^
+user_files\admin\1\1\myclass.cpp: In member function 'std::__cxx11::string myClass::hello(std::__cxx11::string)':
+user_files\admin\1\1\myclass.cpp:9:1: error: expected ';' before '}' token
+ }
+ ^
+user_files\admin\1\1\myclass.cpp: In member function 'std::__cxx11::string myClass::there()':
+user_files\admin\1\1\myclass.cpp:13:1: error: expected ';' before '}' token
+ }
+ ^
+
 --
 Hello
 
 --
-Hello
+Compiler error: user_files\admin\1\1\myclass.cpp: In member function 'std::__cxx11::string myClass::hello()':
+user_files\admin\1\1\myclass.cpp:5:1: error: expected ';' before '}' token
+ }
+ ^
+user_files\admin\1\1\myclass.cpp: In member function 'std::__cxx11::string myClass::hello(std::__cxx11::string)':
+user_files\admin\1\1\myclass.cpp:9:1: error: expected ';' before '}' token
+ }
+ ^
+user_files\admin\1\1\myclass.cpp: In member function 'std::__cxx11::string myClass::there()':
+user_files\admin\1\1\myclass.cpp:13:1: error: expected ';' before '}' token
+ }
+ ^
+
 --
 Hello there
 Hello there
 
 --
-Hello there
-Hello there
+Compiler error: user_files\admin\1\1\myclass.cpp: In member function 'std::__cxx11::string myClass::hello()':
+user_files\admin\1\1\myclass.cpp:5:1: error: expected ';' before '}' token
+ }
+ ^
+user_files\admin\1\1\myclass.cpp: In member function 'std::__cxx11::string myClass::hello(std::__cxx11::string)':
+user_files\admin\1\1\myclass.cpp:9:1: error: expected ';' before '}' token
+ }
+ ^
+user_files\admin\1\1\myclass.cpp: In member function 'std::__cxx11::string myClass::there()':
+user_files\admin\1\1\myclass.cpp:13:1: error: expected ';' before '}' token
+ }
+ ^
+
 --
 there
 
 --
-there
---
-Hello Hrafn
+Compiler error: user_files\admin\1\1\myclass.cpp: In member function 'std::__cxx11::string myClass::hello()':
+user_files\admin\1\1\myclass.cpp:5:1: error: expected ';' before '}' token
+ }
+ ^
+user_files\admin\1\1\myclass.cpp: In member function 'std::__cxx11::string myClass::hello(std::__cxx11::string)':
+user_files\admin\1\1\myclass.cpp:9:1: error: expected ';' before '}' token
+ }
+ ^
+user_files\admin\1\1\myclass.cpp: In member function 'std::__cxx11::string myClass::there()':
+user_files\admin\1\1\myclass.cpp:13:1: error: expected ';' before '}' token
+ }
+ ^
 
 --
 Hello Hrafn

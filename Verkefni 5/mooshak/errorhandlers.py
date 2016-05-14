@@ -1,12 +1,13 @@
 from flask import Flask
+import logging
 
 def new_errorhandlers(app):
     @app.errorhandler(402)
-    def page_not_found(e):
+    def payment_required(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(403)
-    def page_not_found(e):
+    def forbidden(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(404)
@@ -14,89 +15,130 @@ def new_errorhandlers(app):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(405)
-    def page_not_found(e):
+    def method_not_allowed(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(406)
-    def page_not_found(e):
+    def not_acceptable(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(408)
-    def page_not_found(e):
+    def request_timeout(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(409)
-    def page_not_found(e):
+    def conflict(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(410)
-    def page_not_found(e):
+    def gone(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(411)
-    def page_not_found(e):
+    def length_required(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(412)
-    def page_not_found(e):
+    def precondition_failed(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(413)
-    def page_not_found(e):
+    def request_entity_too_large(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(414)
-    def page_not_found(e):
+    def request_uri_too_long(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(415)
-    def page_not_found(e):
+    def unsupported_media_type(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(416)
-    def page_not_found(e):
+    def requested_range_not_satisfiable(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(417)
-    def page_not_found(e):
+    def expectation_failed(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(418)
-    def page_not_found(e):
+    def im_a_teapot(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(422)
-    def page_not_found(e):
+    def unprocessable_entity(e):
+        return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
+    
+    @app.errorhandler(423)
+    def locked(e):
+        return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
+
+    @app.errorhandler(424)
+    def failed_dependency(e):
+        return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
+
+    @app.errorhandler(425)
+    def unordered_collection(e):
+        return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
+
+    @app.errorhandler(426)
+    def upgrade_required(e):
+        return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
+
+    @app.errorhandler(429)
+    def too_many_requests(e):
+        return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
+
+    @app.errorhandler(431)
+    def request_header_fields_too_large(e):
+        return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
+
+    @app.errorhandler(444)
+    def no_response(e):
+        return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
+
+    @app.errorhandler(450)
+    def windows_parental_controls(e):
+        return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
+
+    @app.errorhandler(451)
+    def unavailable_legal_reasons(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(500)
-    def page_not_found(e):
-        return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
+    def internal_server_error(e):
+        try:
+            return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
+        except:
+            logging.error(e)
+            app.logger.error(e)
+            return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(500, 500), 500
 
     @app.errorhandler(502)
-    def page_not_found(e):
+    def bad_gateway(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(503)
-    def page_not_found(e):
+    def service_unavailable(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
     
     @app.errorhandler(506)
-    def page_not_found(e):
+    def variant_also_negotiates(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(507)
-    def page_not_found(e):
+    def insufficient_storage(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(508)
-    def page_not_found(e):
+    def loop_detected(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(509)
-    def page_not_found(e):
+    def bandwidth_limit_exceeded(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code
 
     @app.errorhandler(599)
-    def page_not_found(e):
+    def network_connect_timeout(e):
         return '<center><img src="https://http.cat/{}"><br>{}</center>'.format(e.code, e.code), e.code

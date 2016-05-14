@@ -1,0 +1,38 @@
+Accepted
+--
+Size of first queue: 5
+Running the copy constructor!
+Remove from first queue: 13245
+Contents of first queue after remove(): 
+Size of first queue after remove: 0
+Contents of second queue: 13245
+Running the assignment operator!
+Contents of first queue after assignment: 13245
+Remove from second queue: 13245
+Contents of first queue: 13245
+Running the assignment operator!
+Running the assignment operator!
+Contents of third queue: 13245
+Size of third queue: 5
+Running the destructor!
+Running the destructor!
+Running the destructor!
+
+--
+Size of first queue: 5
+Running the copy constructor!
+Remove from first queue: 13245
+Contents of first queue after remove(): 
+Size of first queue after remove: 0
+Contents of second queue: 13245
+Running the assignment operator!
+Contents of first queue after assignment: 13245
+Remove from second queue: 13245
+Contents of first queue: 13245
+Running the assignment operator!
+Running the assignment operator!
+Contents of third queue: 13245
+Size of third queue: 5
+Running the destructor!
+Running the destructor!
+Running the destructor!
