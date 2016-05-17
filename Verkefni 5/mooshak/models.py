@@ -20,7 +20,3 @@ class Project():
     def render(self):
         return {'id':self.id, 'name':self.name, 'desc': Markup(self.desc) }
 
-class User():
-    def __init__(self, username, passhash):
-        self.user = username
-        self.passhash = passhash

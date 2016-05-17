@@ -1,0 +1,4 @@
+# 3rd Party Python Modules used by script
+# To Install: py -m pip -r pip-requirements.txt
+
+flask
